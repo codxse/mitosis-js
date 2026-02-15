@@ -5,6 +5,7 @@ export default {
       preset: {
         name: 'angular',
       },
+      ignoreRecommendedBump: true,
     },
   },
   git: {
