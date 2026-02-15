@@ -43,6 +43,72 @@ const editor = createEditor({
 | `Cmd/Ctrl+Shift+S` | Wrap in `~~strikethrough~~` |
 | `Tab`              | Insert 2 spaces (indent)    |
 
+## Theming
+
+The editor supports light, dark, and auto themes. Import the base CSS and theme files you need:
+
+```bash
+# Core package
+pnpm add @codxse/mitosis-js
+```
+
+```js
+// Dark mode
+import '@codxse/mitosis-js/dist/styles/editor.css'
+import '@codxse/mitosis-js/dist/styles/theme-dark.css'
+
+// Light mode
+import '@codxse/mitosis-js/dist/styles/editor.css'
+import '@codxse/mitosis-js/dist/styles/theme-light.css'
+
+// Auto (follows system preference)
+import '@codxse/mitosis-js/dist/styles/editor.css'
+import '@codxse/mitosis-js/dist/styles/theme-light.css'
+import '@codxse/mitosis-js/dist/styles/theme-dark.css'
+```
+
+### Theme Options
+
+```js
+const editor = createEditor({
+  container: document.getElementById('editor'),
+  theme: 'auto',    // 'light' | 'dark' | 'auto' (default: 'auto')
+})
+
+// Change theme at runtime
+editor.setTheme('dark')
+editor.getTheme() // 'dark' or 'light'
+```
+
+### Custom CSS Variables
+
+Override any CSS variable:
+
+```js
+const editor = createEditor({
+  container: document.getElementById('editor'),
+  cssVars: {
+    '--editor-bg': '#000000',
+    '--editor-text': '#00ff00',
+    '--preview-link': '#ff00ff',
+  },
+})
+```
+
+### CSS Variables Reference
+
+| Variable | Description | Default (Light) | Default (Dark) |
+|----------|-------------|-----------------|----------------|
+| `--editor-bg` | Editor background | #ffffff | #282a36 |
+| `--editor-text` | Editor text color | #282a36 | #f8f8f2 |
+| `--editor-border` | Editor border | #e0e0e0 | #44475a |
+| `--editor-caret` | Cursor color | #000000 | #f8f8f2 |
+| `--preview-bg` | Preview background | #ffffff | #282a36 |
+| `--preview-text` | Preview text | #282a36 | #f8f8f2 |
+| `--preview-code-bg` | Code block background | #f6f8fa | #44475a |
+| `--preview-link` | Link color | #0366d6 | #8be9fd |
+| `--divider-bg` | Divider color | #e0e0e0 | #44475a |
+
 ## Installation
 
 ```bash
