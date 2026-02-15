@@ -6,17 +6,25 @@ import { execSync } from 'node:child_process';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, '..');
 const srcDir = path.join(rootDir, 'src/styles');
-const destDir = path.join(rootDir, 'dist/styles');
+const distDir = path.join(rootDir, 'dist/styles');
+const demoDir = path.join(rootDir, 'demo/public/styles');
 
 const files = ['editor.css', 'theme-light.css', 'theme-dark.css'];
 
-fs.mkdirSync(destDir, { recursive: true });
+fs.mkdirSync(distDir, { recursive: true });
+fs.mkdirSync(demoDir, { recursive: true });
 
 for (const file of files) {
   const src = path.join(srcDir, file);
   const baseName = file.replace('.css', '');
-  const dest = path.join(destDir, `${baseName}.min.css`);
 
-  execSync(`cleancss -o ${dest} ${src}`, { stdio: 'inherit' });
+  // Minify to dist
+  const distDest = path.join(distDir, `${baseName}.min.css`);
+  execSync(`cleancss -o ${distDest} ${src}`, { stdio: 'inherit' });
+
+  // Copy to demo/public for testing
+  const demoDest = path.join(demoDir, `${baseName}.min.css`);
+  fs.copyFileSync(distDest, demoDest);
+
   console.log(`Minified: ${baseName}.min.css`);
 }
