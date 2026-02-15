@@ -1,5 +1,6 @@
 import {EditorPane} from './editor-pane.js';
 import {PreviewPane} from './preview-pane.js';
+import type {PrismInstance} from '../parser/markdown.js';
 
 export class TwoPanelLayout {
   private container: HTMLDivElement;
@@ -10,9 +11,13 @@ export class TwoPanelLayout {
   private previewPane: PreviewPane;
   private content = '';
   private isDragging = false;
+  private prism?: object;
 
-  constructor(config: { container: HTMLElement; initialContent?: string }) {
+  constructor(config: { container: HTMLElement; initialContent?: string; prism?: object }) {
     this.content = config.initialContent ?? '';
+    if (config.prism !== undefined) {
+      this.prism = config.prism;
+    }
     this.container = document.createElement('div');
     this.container.className = 'two-panel-layout';
     Object.assign(this.container.style, {
@@ -60,10 +65,14 @@ export class TwoPanelLayout {
       onScroll: (scrollTop, scrollHeight) => this.syncScroll(scrollTop, scrollHeight, 'editor')
     });
 
-    this.previewPane = new PreviewPane({
+    const previewConfig: { container: HTMLDivElement; onScroll: (scrollTop: number, scrollHeight: number) => void; prism?: PrismInstance } = {
       container: this.previewPaneContainer,
       onScroll: (scrollTop, scrollHeight) => this.syncScroll(scrollTop, scrollHeight, 'preview')
-    });
+    };
+    if (this.prism !== undefined) {
+      previewConfig.prism = this.prism as PrismInstance;
+    }
+    this.previewPane = new PreviewPane(previewConfig);
 
     this.container.appendChild(this.editorPaneContainer);
     this.container.appendChild(this.divider);

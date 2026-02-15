@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 import { parseMarkdownToHTML } from '../src/parser/markdown.js';
 
 describe('Syntax Highlighting', () => {
@@ -36,7 +36,9 @@ describe('Syntax Highlighting', () => {
       const pythonCode = '```python\ndef foo():\n    pass\n```';
       const html = parseMarkdownToHTML(pythonCode, mockPrism);
 
+      // Verify Prism highlighting was applied (not just base markdown parsing)
       expect(html).toContain('class="language-python"');
+      expect(html).toContain('token keyword');
     });
   });
 });

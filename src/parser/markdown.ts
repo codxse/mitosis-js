@@ -6,24 +6,41 @@ marked.use({
   breaks: true
 });
 
-export function parseMarkdownToHTML(markdown: string, prism?: object): string {
+export interface PrismInstance {
+  languages?: Record<string, unknown>;
+  highlight?(code: string, grammar: unknown, language: string): string;
+}
+
+const configuredPrisms = new WeakSet<PrismInstance>();
+
+function configureHighlightExtension(prism: PrismInstance): void {
+  if (configuredPrisms.has(prism)) {
+    return;
+  }
+
+  marked.use(markedHighlight({
+    langPrefix: 'language-',
+    highlight(code, lang) {
+      if (prism.highlight) {
+        try {
+          const prismLang = prism.languages?.[lang];
+          return prism.highlight(code, prismLang, lang);
+        } catch {
+          return code;
+        }
+      }
+      return code;
+    }
+  }));
+
+  configuredPrisms.add(prism);
+}
+
+export function parseMarkdownToHTML(markdown: string, prism?: PrismInstance): string {
   if (!markdown.trim()) return '';
 
   if (prism) {
-    marked.use(markedHighlight({
-      langPrefix: 'language-',
-      highlight(code, lang) {
-        if ((prism as any).highlight) {
-          try {
-            const prismLang = (prism as any).languages?.[lang];
-            return (prism as any).highlight(code, prismLang, lang);
-          } catch {
-            return code;
-          }
-        }
-        return code;
-      }
-    }));
+    configureHighlightExtension(prism);
   }
 
   const result = marked(markdown);

@@ -19,11 +19,14 @@ export class Editor {
       position: 'relative'
     });
 
-    const layoutConfig: {container: HTMLElement; initialContent?: string} = {
+    const layoutConfig: {container: HTMLElement; initialContent?: string; prism?: object} = {
       container: wrapper
     };
     if (options.content !== undefined) {
       layoutConfig.initialContent = options.content;
+    }
+    if (options.prism !== undefined) {
+      layoutConfig.prism = options.prism;
     }
 
     this.layout = new TwoPanelLayout(layoutConfig);
