@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](https://github.com/codxse/mitosis-js/compare/v1.4.0...v1.5.0) (2026-02-15)
+
+
+### Features
+
+* add CSS copy to build script ([588d049](https://github.com/codxse/mitosis-js/commit/588d049b7d98c8164f7630abc77606e926d4d47a))
+* add CSS variables to editor.css ([9972cbe](https://github.com/codxse/mitosis-js/commit/9972cbec335d7c587be86707922f97081f59bf8a))
+* add dark theme CSS ([19aa968](https://github.com/codxse/mitosis-js/commit/19aa96878473ae59a932778fdaa6b01d6aff7f9a))
+* add light theme CSS ([77f43f5](https://github.com/codxse/mitosis-js/commit/77f43f5c261f561ca5d1be407a7d9409b8c7e378))
+* add minification for CSS and JS bundles ([dc6d187](https://github.com/codxse/mitosis-js/commit/dc6d187e0391131e8d9eaa94c817f4d341dd69de))
+* add theme options to EditorOptions ([b9033b8](https://github.com/codxse/mitosis-js/commit/b9033b825dff3e4f1b70bd39d2395ffc06af995d))
+* add theme support to Editor class ([81b64c8](https://github.com/codxse/mitosis-js/commit/81b64c8087b618ddc26e720a3c8be6b447928dfb))
+* add toggle theme button to demo ([8907c04](https://github.com/codxse/mitosis-js/commit/8907c041a28f6e468f8e16a65537547fc43f49a7))
+* use .min.css and .min.js extensions for minified files ([5b765a5](https://github.com/codxse/mitosis-js/commit/5b765a5e8b01a96d6b91136dcc8d0bf9071e678a))
+* use CSS variables in editor-pane ([3330c62](https://github.com/codxse/mitosis-js/commit/3330c625a5710b63ff8126cd7fade895b547f0d2))
+* use CSS variables in preview-pane ([84105b7](https://github.com/codxse/mitosis-js/commit/84105b778a08b297923f0ca7474f04ba02c1f748))
+* use CSS variables in two-panel-layout ([92effe2](https://github.com/codxse/mitosis-js/commit/92effe2068196853fe3a5d5dc36291a94761803c))
+
+
+### Bug Fixes
+
+* add CSS imports to demo and add theme tests ([9743393](https://github.com/codxse/mitosis-js/commit/974339398901acff2fa226a1923acfbfa8dc2643))
+* add light theme CSS to demo for toggle to work ([b020f9f](https://github.com/codxse/mitosis-js/commit/b020f9fddb946316edd6f8ef3ee64fd33a6689ec))
+* auto-copy CSS to demo/public on build ([0b404b7](https://github.com/codxse/mitosis-js/commit/0b404b79e0b9134ee8a50e0835a7e0f5b618c7c5))
+* copy CSS to demo folder for proper serving ([9a6f2c6](https://github.com/codxse/mitosis-js/commit/9a6f2c666873dbfda06e9f72254055f734a6b38e))
+* properly remove event listener in Editor class ([4134d91](https://github.com/codxse/mitosis-js/commit/4134d91583583e88c6d0924e8941e54adc313416))
+* serve CSS from demo/public instead of vite config ([43d05d6](https://github.com/codxse/mitosis-js/commit/43d05d6a620ab19a628d2ff2d4509d85f0fb782a))
+* serve CSS from src/styles via demo/public ([835dc26](https://github.com/codxse/mitosis-js/commit/835dc26f1e2b98b5d665311c5f8cf755cc3996e9))
+* use Vite publicDir to serve dist/styles ([2f1e61a](https://github.com/codxse/mitosis-js/commit/2f1e61a02b57c277f9bb1358e5f3d65a7446be26))
+
 ## 1.4.0 (2026-02-15)
 
 
