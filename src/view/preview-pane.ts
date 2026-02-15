@@ -1,59 +1,63 @@
-import {parseMarkdownToHTML} from '../parser/markdown.js';
-import type {PrismInstance} from '../parser/markdown.js';
+import { parseMarkdownToHTML } from '../parser/markdown.js'
+import type { PrismInstance } from '../parser/markdown.js'
 
 export class PreviewPane {
-  private container: HTMLDivElement;
-  private content: HTMLDivElement;
-  private onScroll: (scrollTop: number, scrollHeight: number) => void;
-  private prism?: PrismInstance;
-  private scrollHandler: () => void;
+  private container: HTMLDivElement
+  private content: HTMLDivElement
+  private onScroll: (scrollTop: number, scrollHeight: number) => void
+  private prism?: PrismInstance
+  private scrollHandler: () => void
 
-  constructor(config: { container: HTMLElement; onScroll?: (scrollTop: number, scrollHeight: number) => void; prism?: PrismInstance }) {
-    this.onScroll = config.onScroll ?? (() => {});
+  constructor(config: {
+    container: HTMLElement
+    onScroll?: (scrollTop: number, scrollHeight: number) => void
+    prism?: PrismInstance
+  }) {
+    this.onScroll = config.onScroll ?? (() => {})
     if (config.prism !== undefined) {
-      this.prism = config.prism;
+      this.prism = config.prism
     }
-    this.scrollHandler = () => this.handleScroll();
+    this.scrollHandler = () => this.handleScroll()
 
-    this.container = document.createElement('div');
-    this.container.className = 'preview-pane';
+    this.container = document.createElement('div')
+    this.container.className = 'preview-pane'
     Object.assign(this.container.style, {
       height: '100%',
       overflow: 'hidden',
       display: 'flex',
-      flexDirection: 'column'
-    });
+      flexDirection: 'column',
+    })
 
-    const styleEl = document.createElement('style');
-    styleEl.textContent = this.getStyles();
-    this.container.appendChild(styleEl);
+    const styleEl = document.createElement('style')
+    styleEl.textContent = this.getStyles()
+    this.container.appendChild(styleEl)
 
-    this.content = document.createElement('div');
-    this.content.className = 'preview-content';
+    this.content = document.createElement('div')
+    this.content.className = 'preview-content'
     Object.assign(this.content.style, {
       padding: '16px',
       overflow: 'auto',
-      flex: '1'
-    });
+      flex: '1',
+    })
 
-    this.content.addEventListener('scroll', this.scrollHandler);
+    this.content.addEventListener('scroll', this.scrollHandler)
 
-    this.container.appendChild(this.content);
-    config.container.appendChild(this.container);
+    this.container.appendChild(this.content)
+    config.container.appendChild(this.container)
   }
 
   private handleScroll(): void {
-    const {scrollTop, scrollHeight} = this.content;
-    this.onScroll(scrollTop, scrollHeight);
+    const { scrollTop, scrollHeight } = this.content
+    this.onScroll(scrollTop, scrollHeight)
   }
 
   setContent(markdown: string): void {
-    this.content.innerHTML = parseMarkdownToHTML(markdown, this.prism);
+    this.content.innerHTML = parseMarkdownToHTML(markdown, this.prism)
   }
 
   setScrollRatio(ratio: number): void {
-    const maxScroll = this.content.scrollHeight - this.content.clientHeight;
-    this.content.scrollTop = maxScroll * ratio;
+    const maxScroll = this.content.scrollHeight - this.content.clientHeight
+    this.content.scrollTop = maxScroll * ratio
   }
 
   private getStyles(): string {
@@ -123,11 +127,11 @@ export class PreviewPane {
         border-top: 1px solid #e1e4e8;
         margin: 2em 0;
       }
-    `;
+    `
   }
 
   destroy(): void {
-    this.content.removeEventListener('scroll', this.scrollHandler);
-    this.container.remove();
+    this.content.removeEventListener('scroll', this.scrollHandler)
+    this.container.remove()
   }
 }

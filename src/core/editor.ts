@@ -1,61 +1,61 @@
-import type {EditorOptions, EditorOutput} from './types.js';
-import {TwoPanelLayout} from '../view/two-panel-layout.js';
-import {parseMarkdownToHTML} from '../parser/markdown.js';
+import type { EditorOptions, EditorOutput } from './types.js'
+import { TwoPanelLayout } from '../view/two-panel-layout.js'
+import { parseMarkdownToHTML } from '../parser/markdown.js'
 
 export class Editor {
-  private layout: TwoPanelLayout;
-  private container: HTMLElement;
-  private options: EditorOptions;
+  private layout: TwoPanelLayout
+  private container: HTMLElement
+  private options: EditorOptions
 
   constructor(options: EditorOptions) {
-    this.options = options;
-    this.container = options.container;
+    this.options = options
+    this.container = options.container
 
-    const wrapper = document.createElement('div');
-    wrapper.className = 'mitosis-editor-wrapper';
+    const wrapper = document.createElement('div')
+    wrapper.className = 'mitosis-editor-wrapper'
     Object.assign(wrapper.style, {
       width: '100%',
       height: '600px',
-      position: 'relative'
-    });
+      position: 'relative',
+    })
 
-    const layoutConfig: {container: HTMLElement; initialContent?: string; prism?: object} = {
-      container: wrapper
-    };
+    const layoutConfig: { container: HTMLElement; initialContent?: string; prism?: object } = {
+      container: wrapper,
+    }
     if (options.content !== undefined) {
-      layoutConfig.initialContent = options.content;
+      layoutConfig.initialContent = options.content
     }
     if (options.prism !== undefined) {
-      layoutConfig.prism = options.prism;
+      layoutConfig.prism = options.prism
     }
 
-    this.layout = new TwoPanelLayout(layoutConfig);
+    this.layout = new TwoPanelLayout(layoutConfig)
 
-    this.container.appendChild(wrapper);
+    this.container.appendChild(wrapper)
   }
 
   getMarkdown(): string {
-    return this.layout.getMarkdown();
+    return this.layout.getMarkdown()
   }
 
   getHTML(): string {
-    return parseMarkdownToHTML(this.layout.getMarkdown(), this.options.prism);
+    return parseMarkdownToHTML(this.layout.getMarkdown(), this.options.prism)
   }
 
   getBoth(): EditorOutput {
-    const markdown = this.getMarkdown();
+    const markdown = this.getMarkdown()
     return {
       markdown,
-      html: parseMarkdownToHTML(markdown, this.options.prism)
-    };
+      html: parseMarkdownToHTML(markdown, this.options.prism),
+    }
   }
 
   setMarkdown(content: string): void {
-    this.layout.setContent(content);
+    this.layout.setContent(content)
   }
 
   destroy(): void {
-    this.layout.destroy();
-    this.container.innerHTML = '';
+    this.layout.destroy()
+    this.container.innerHTML = ''
   }
 }

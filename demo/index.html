@@ -1,141 +1,160 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mitosis JS Demo - Markdown Editor</title>
-  <!-- Prism.js for syntax highlighting -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
-  <style>
-    :root {
-      --max-content-width: 100%;
-    }
-    * { box-sizing: border-box; }
-    body {
-      font-family: system-ui, -apple-system, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background: #f5f5f5;
-    }
-    .demo-header {
-      max-width: var(--max-content-width);
-      margin: 0 auto 20px;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    h1 { margin: 0 0 10px 0; }
-    .shortcuts-info {
-      background: #f6f8fa;
-      padding: 12px 16px;
-      border-radius: 6px;
-      margin: 15px 0;
-      font-size: 13px;
-    }
-    .shortcuts-info kbd {
-      background: white;
-      padding: 2px 6px;
-      border-radius: 3px;
-      border: 1px solid #ddd;
-      font-family: ui-monospace, monospace;
-      font-size: 12px;
-    }
-    .shortcuts-info ul {
-      margin: 8px 0 0 0;
-      padding-left: 20px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px 24px;
-      list-style: none;
-    }
-    .shortcuts-info li {
-      margin: 0;
-    }
-    .demo-controls {
-      display: flex;
-      gap: 10px;
-      margin-top: 15px;
-      flex-wrap: wrap;
-    }
-    button {
-      padding: 10px 16px;
-      border: 1px solid #ddd;
-      background: white;
-      border-radius: 4px;
-      cursor: pointer;
-      font-size: 14px;
-      transition: background 0.2s;
-    }
-    button:hover { background: #f0f0f0; }
-    .output-display {
-      max-width: var(--max-content-width);
-      margin: 20px auto;
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-      display: none;
-    }
-    .output-display.visible { display: block; }
-    .output-display h3 { margin-top: 0; }
-    .output-display pre {
-      background: #f6f8fa;
-      padding: 12px;
-      border-radius: 4px;
-      overflow: auto;
-      max-height: 300px;
-    }
-    .editor-wrapper {
-      max-width: var(--max-content-width);
-      margin: 0 auto;
-      background: white;
-      padding: 10px;
-      border-radius: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-  </style>
-</head>
-<body>
-  <div class="demo-header">
-    <h1>Mitosis JS Demo - Markdown Editor</h1>
-    <p>Write markdown on the left, see live preview on the right. Code blocks are syntax-highlighted with Prism.js.</p>
-    
-    <div class="shortcuts-info">
-      <strong>Keyboard Shortcuts:</strong>
-      <ul>
-        <li><kbd>Cmd/Ctrl+B</kbd> Bold</li>
-        <li><kbd>Cmd/Ctrl+I</kbd> Italic</li>
-        <li><kbd>Cmd/Ctrl+K</kbd> Link</li>
-        <li><kbd>Cmd/Ctrl+E</kbd> Inline Code</li>
-        <li><kbd>Cmd/Ctrl+Shift+S</kbd> Strikethrough</li>
-        <li><kbd>Tab</kbd> Indent</li>
-      </ul>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mitosis JS Demo - Markdown Editor</title>
+    <!-- Prism.js for syntax highlighting -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --max-content-width: 100%;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      .demo-header {
+        max-width: var(--max-content-width);
+        margin: 0 auto 20px;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        margin: 0 0 10px 0;
+      }
+      .shortcuts-info {
+        background: #f6f8fa;
+        padding: 12px 16px;
+        border-radius: 6px;
+        margin: 15px 0;
+        font-size: 13px;
+      }
+      .shortcuts-info kbd {
+        background: white;
+        padding: 2px 6px;
+        border-radius: 3px;
+        border: 1px solid #ddd;
+        font-family: ui-monospace, monospace;
+        font-size: 12px;
+      }
+      .shortcuts-info ul {
+        margin: 8px 0 0 0;
+        padding-left: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 24px;
+        list-style: none;
+      }
+      .shortcuts-info li {
+        margin: 0;
+      }
+      .demo-controls {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+        flex-wrap: wrap;
+      }
+      button {
+        padding: 10px 16px;
+        border: 1px solid #ddd;
+        background: white;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background 0.2s;
+      }
+      button:hover {
+        background: #f0f0f0;
+      }
+      .output-display {
+        max-width: var(--max-content-width);
+        margin: 20px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: none;
+      }
+      .output-display.visible {
+        display: block;
+      }
+      .output-display h3 {
+        margin-top: 0;
+      }
+      .output-display pre {
+        background: #f6f8fa;
+        padding: 12px;
+        border-radius: 4px;
+        overflow: auto;
+        max-height: 300px;
+      }
+      .editor-wrapper {
+        max-width: var(--max-content-width);
+        margin: 0 auto;
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-header">
+      <h1>Mitosis JS Demo - Markdown Editor</h1>
+      <p>
+        Write markdown on the left, see live preview on the right. Code blocks are
+        syntax-highlighted with Prism.js.
+      </p>
+
+      <div class="shortcuts-info">
+        <strong>Keyboard Shortcuts:</strong>
+        <ul>
+          <li><kbd>Cmd/Ctrl+B</kbd> Bold</li>
+          <li><kbd>Cmd/Ctrl+I</kbd> Italic</li>
+          <li><kbd>Cmd/Ctrl+K</kbd> Link</li>
+          <li><kbd>Cmd/Ctrl+E</kbd> Inline Code</li>
+          <li><kbd>Cmd/Ctrl+Shift+S</kbd> Strikethrough</li>
+          <li><kbd>Tab</kbd> Indent</li>
+        </ul>
+      </div>
+
+      <div class="demo-controls">
+        <button id="btn-markdown">Get Markdown</button>
+        <button id="btn-html">Get HTML</button>
+        <button id="btn-both">Get Both</button>
+        <button id="btn-set-sample">Set Sample Content</button>
+        <button id="btn-clear">Clear Editor</button>
+      </div>
     </div>
-    
-    <div class="demo-controls">
-      <button id="btn-markdown">Get Markdown</button>
-      <button id="btn-html">Get HTML</button>
-      <button id="btn-both">Get Both</button>
-      <button id="btn-set-sample">Set Sample Content</button>
-      <button id="btn-clear">Clear Editor</button>
+
+    <div class="editor-wrapper">
+      <div id="editor" style="height: auto"></div>
     </div>
-  </div>
 
-  <div class="editor-wrapper">
-    <div id="editor" style="height: auto;"></div>
-  </div>
+    <div id="output" class="output-display">
+      <h3 id="output-title">Output</h3>
+      <pre id="output-content"></pre>
+    </div>
 
-  <div id="output" class="output-display">
-    <h3 id="output-title">Output</h3>
-    <pre id="output-content"></pre>
-  </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
-  <script type="module" src="./script.js"></script>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script type="module" src="./script.js"></script>
+  </body>
 </html>

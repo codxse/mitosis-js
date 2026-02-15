@@ -1,4 +1,4 @@
-import { createEditor } from '../src/index.js';
+import { createEditor } from '../src/index.js'
 
 const sampleMarkdown = `# Welcome to Mitosis JS
 
@@ -88,51 +88,51 @@ editor = create_editor("#editor", "Hello World")
 ---
 
 *Start typing in the editor to see the syntax highlighting!*
-`;
+`
 
-let editor;
+let editor
 
 try {
   editor = createEditor({
     container: document.getElementById('editor'),
     content: sampleMarkdown,
-    prism: window.Prism
-  });
+    prism: window.Prism,
+  })
 
   document.getElementById('btn-markdown').addEventListener('click', () => {
-    const markdown = editor.getMarkdown();
-    showOutput('Markdown Output', markdown);
-  });
+    const markdown = editor.getMarkdown()
+    showOutput('Markdown Output', markdown)
+  })
 
   document.getElementById('btn-html').addEventListener('click', () => {
-    const html = editor.getHTML();
-    showOutput('HTML Output', html);
-  });
+    const html = editor.getHTML()
+    showOutput('HTML Output', html)
+  })
 
   document.getElementById('btn-both').addEventListener('click', () => {
-    const { markdown, html } = editor.getBoth();
-    showOutput('Both Outputs', `Markdown:\n\n${markdown}\n\n\nHTML:\n\n${html}`);
-  });
+    const { markdown, html } = editor.getBoth()
+    showOutput('Both Outputs', `Markdown:\n\n${markdown}\n\n\nHTML:\n\n${html}`)
+  })
 
   document.getElementById('btn-set-sample').addEventListener('click', () => {
-    editor.setMarkdown(sampleMarkdown);
-  });
+    editor.setMarkdown(sampleMarkdown)
+  })
 
   document.getElementById('btn-clear').addEventListener('click', () => {
-    editor.setMarkdown('');
-  });
+    editor.setMarkdown('')
+  })
 
   function showOutput(title, content) {
-    document.getElementById('output-title').textContent = title;
-    document.getElementById('output-content').textContent = content;
-    document.getElementById('output').classList.add('visible');
+    document.getElementById('output-title').textContent = title
+    document.getElementById('output-content').textContent = content
+    document.getElementById('output').classList.add('visible')
   }
 } catch (error) {
-  console.error('Failed to initialize editor:', error);
+  console.error('Failed to initialize editor:', error)
   document.getElementById('editor').innerHTML = `
     <div style="padding: 20px; color: red;">
       <h3>Error initializing editor</h3>
       <pre>${error.message}</pre>
     </div>
-  `;
+  `
 }

@@ -13,6 +13,7 @@
 ### Task 1: Add marked-highlight dependency
 
 **Files:**
+
 - Modify: `package.json`
 
 **Step 1: Add marked-highlight to dependencies**
@@ -41,18 +42,19 @@ git commit -m "deps: add marked-highlight dependency"
 ### Task 2: Update EditorOptions type
 
 **Files:**
+
 - Modify: `src/core/types.ts`
 
 **Step 1: Add prism option to EditorOptions**
 
 ```typescript
 export interface EditorOptions {
-  container: HTMLElement;
-  content?: string;
-  readonly?: boolean;
-  theme?: 'light' | 'dark';
-  placeholder?: string;
-  prism?: object;
+  container: HTMLElement
+  content?: string
+  readonly?: boolean
+  theme?: 'light' | 'dark'
+  placeholder?: string
+  prism?: object
 }
 ```
 
@@ -68,24 +70,25 @@ git commit -m "feat: add prism option to EditorOptions"
 ### Task 3: Write failing test for syntax highlighting
 
 **Files:**
+
 - Create: `tests/syntax-highlight.test.ts`
 
 **Step 1: Write test file**
 
-```typescript
-import { describe, it, expect, beforeEach } from 'vitest';
-import { parseMarkdownToHTML } from '../src/parser/markdown.js';
+````typescript
+import { describe, it, expect, beforeEach } from 'vitest'
+import { parseMarkdownToHTML } from '../src/parser/markdown.js'
 
 describe('Syntax Highlighting', () => {
   describe('without Prism', () => {
     it('should render code blocks without highlighting', () => {
-      const markdown = '```js\nconst x = 1;\n```';
-      const html = parseMarkdownToHTML(markdown);
+      const markdown = '```js\nconst x = 1;\n```'
+      const html = parseMarkdownToHTML(markdown)
 
-      expect(html).toContain('<pre><code class="language-js">');
-      expect(html).toContain('const x = 1;');
-    });
-  });
+      expect(html).toContain('<pre><code class="language-js">')
+      expect(html).toContain('const x = 1;')
+    })
+  })
 
   describe('with Prism', () => {
     // Mock Prism with minimal highlighting
@@ -93,30 +96,30 @@ describe('Syntax Highlighting', () => {
       languages: {
         javascript: true,
         typescript: true,
-        python: true
+        python: true,
       },
       highlight: (code: string, grammar: unknown, language: string) => {
-        return `<span class="token keyword">const</span> ${code.slice(6)}`;
-      }
-    };
+        return `<span class="token keyword">const</span> ${code.slice(6)}`
+      },
+    }
 
     it('should render code blocks with highlighting when Prism provided', () => {
-      const markdown = '```js\nconst x = 1;\n```';
-      const html = parseMarkdownToHTML(markdown, mockPrism);
+      const markdown = '```js\nconst x = 1;\n```'
+      const html = parseMarkdownToHTML(markdown, mockPrism)
 
-      expect(html).toContain('<pre><code class="language-js">');
-      expect(html).toContain('token keyword');
-    });
+      expect(html).toContain('<pre><code class="language-js">')
+      expect(html).toContain('token keyword')
+    })
 
     it('should support multiple languages', () => {
-      const pythonCode = '```python\ndef foo():\n    pass\n```';
-      const html = parseMarkdownToHTML(pythonCode, mockPrism);
+      const pythonCode = '```python\ndef foo():\n    pass\n```'
+      const html = parseMarkdownToHTML(pythonCode, mockPrism)
 
-      expect(html).toContain('class="language-python"');
-    });
-  });
-});
-```
+      expect(html).toContain('class="language-python"')
+    })
+  })
+})
+````
 
 **Step 2: Run test to verify it fails**
 
@@ -135,44 +138,47 @@ git commit -m "test: add syntax highlighting tests"
 ### Task 4: Update markdown parser to accept Prism
 
 **Files:**
+
 - Modify: `src/parser/markdown.ts`
 
 **Step 1: Rewrite to accept optional prism parameter**
 
 ```typescript
-import {marked} from 'marked';
-import {markedHighlight} from 'marked-highlight';
+import { marked } from 'marked'
+import { markedHighlight } from 'marked-highlight'
 
 marked.use({
   gfm: true,
-  breaks: true
-});
+  breaks: true,
+})
 
 export function parseMarkdownToHTML(markdown: string, prism?: object): string {
-  if (!markdown.trim()) return '';
+  if (!markdown.trim()) return ''
 
   if (prism) {
-    marked.use(markedHighlight({
-      langPrefix: 'language-',
-      highlight(code, lang) {
-        const prismLang = (prism as any).languages?.[lang];
-        if (prismLang && (prism as any).highlight) {
-          try {
-            return (prism as any).highlight(code, prismLang, lang);
-          } catch {
-            return code;
+    marked.use(
+      markedHighlight({
+        langPrefix: 'language-',
+        highlight(code, lang) {
+          const prismLang = (prism as any).languages?.[lang]
+          if (prismLang && (prism as any).highlight) {
+            try {
+              return (prism as any).highlight(code, prismLang, lang)
+            } catch {
+              return code
+            }
           }
-        }
-        return code;
-      }
-    }));
+          return code
+        },
+      })
+    )
   }
 
-  const result = marked(markdown);
+  const result = marked(markdown)
   if (typeof result === 'string') {
-    return result;
+    return result
   }
-  return '';
+  return ''
 }
 ```
 
@@ -193,6 +199,7 @@ git commit -m "feat: add syntax highlighting support with marked-highlight"
 ### Task 5: Update Editor to pass Prism to parser
 
 **Files:**
+
 - Modify: `src/core/editor.ts`
 
 **Step 1: Pass prism option to parseMarkdownToHTML**
@@ -216,6 +223,7 @@ git commit -m "feat: wire prism option to markdown parser"
 ### Task 6: Update README documentation
 
 **Files:**
+
 - Modify: `README.md`
 
 **Step 1: Add syntax highlighting section to README**
@@ -235,9 +243,9 @@ import 'prismjs/components/prism-typescript';
 import 'prismjs/themes/prism-tomorrow.css';
 
 const editor = createEditor({
-  container: document.getElementById('editor'),
-  content: '# Hello\n```js\nconst x = 1;\n```',
-  prism: Prism  // Optional - without this, code blocks render without highlighting
+container: document.getElementById('editor'),
+content: '# Hello\n`js\nconst x = 1;\n`',
+prism: Prism // Optional - without this, code blocks render without highlighting
 });
 \`\`\`
 

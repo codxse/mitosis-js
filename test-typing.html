@@ -1,22 +1,27 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <link rel="stylesheet" href="dist/styles/editor.css">
-  <style>
-    body { margin: 0; font-family: system-ui; }
-    #editor { height: 100vh; }
-  </style>
-</head>
-<body>
-  <div id="editor"></div>
+  <head>
+    <link rel="stylesheet" href="dist/styles/editor.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui;
+      }
+      #editor {
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="editor"></div>
 
-  <script type="module">
-    import { createEditor } from './dist/index.js';
+    <script type="module">
+      import { createEditor } from './dist/index.js'
 
-    const editor = createEditor({
-      container: document.getElementById('editor'),
-      content: 'Start typing here...\n\nTry typing:\n```javascript\nconst x = 5;\n```'
-    });
-  </script>
-</body>
+      const editor = createEditor({
+        container: document.getElementById('editor'),
+        content: 'Start typing here...\n\nTry typing:\n```javascript\nconst x = 5;\n```',
+      })
+    </script>
+  </body>
 </html>
