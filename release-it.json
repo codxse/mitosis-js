@@ -7,6 +7,12 @@ export default {
       releaseAs: 'minor',
     },
   },
+  bump: {
+    preid: 'rc',
+    replace: {
+      files: ['package.json'],
+    },
+  },
   git: {
     commitMessage: 'chore: release v${version}',
     requireCleanWorkingDir: true,
@@ -21,5 +27,6 @@ export default {
   },
   hooks: {
     'before:init': ['pnpm test', 'pnpm run build'],
+    'after:bump': 'pnpm exec conventional-changelog -p angular -i CHANGELOG.md -s',
   },
 }
