@@ -24,17 +24,14 @@ export class Editor {
       position: 'relative',
     })
 
-    // Apply custom CSS vars if provided
     if (options.cssVars) {
       for (const [key, value] of Object.entries(options.cssVars)) {
         this.wrapper.style.setProperty(key, value)
       }
     }
 
-    // Handle theme
     this.applyTheme(theme)
 
-    // Listen for system theme changes if auto
     if (theme === 'auto') {
       this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
       this.themeChangeHandler = () => {
