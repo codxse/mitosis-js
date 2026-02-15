@@ -1,18 +1,4 @@
 export default {
-  plugins: {
-    '@release-it/conventional-changelog': {
-      infile: 'CHANGELOG.md',
-      preset: 'angular',
-      ignoreRecommendedBump: true,
-      releaseAs: 'minor',
-    },
-  },
-  bump: {
-    preid: 'rc',
-    replace: {
-      files: ['package.json'],
-    },
-  },
   git: {
     commitMessage: 'chore: release v${version}',
     requireCleanWorkingDir: true,
