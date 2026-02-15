@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](https://github.com/codxse/mitosis-js/compare/v1.5.0...v1.5.1) (2026-02-15)
+
+
+### Bug Fixes
+
+* run bundle build in release workflow ([67d592f](https://github.com/codxse/mitosis-js/commit/67d592fdf4c8e5d9a73d031d529fd3909ea1def5))
+
 ## [1.5.0](https://github.com/codxse/mitosis-js/compare/v1.4.0...v1.5.0) (2026-02-15)
 
 
