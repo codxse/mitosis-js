@@ -4,6 +4,7 @@ export interface EditorOptions {
   readonly?: boolean;
   theme?: 'light' | 'dark';
   placeholder?: string;
+  prism?: object;
 }
 
 export interface EditorOutput {
