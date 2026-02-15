@@ -5,8 +5,10 @@ import {parseMarkdownToHTML} from '../parser/markdown.js';
 export class Editor {
   private layout: TwoPanelLayout;
   private container: HTMLElement;
+  private options: EditorOptions;
 
   constructor(options: EditorOptions) {
+    this.options = options;
     this.container = options.container;
 
     const wrapper = document.createElement('div');
@@ -34,14 +36,14 @@ export class Editor {
   }
 
   getHTML(): string {
-    return parseMarkdownToHTML(this.layout.getMarkdown());
+    return parseMarkdownToHTML(this.layout.getMarkdown(), this.options.prism);
   }
 
   getBoth(): EditorOutput {
     const markdown = this.getMarkdown();
     return {
       markdown,
-      html: parseMarkdownToHTML(markdown)
+      html: parseMarkdownToHTML(markdown, this.options.prism)
     };
   }
 
