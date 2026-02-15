@@ -4,6 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mitosis JS Demo - Markdown Editor</title>
+    <!-- Editor styles -->
+    <link rel="stylesheet" href="/styles/editor.min.css" />
+    <link rel="stylesheet" href="/styles/theme-light.min.css" />
+    <link rel="stylesheet" href="/styles/theme-dark.min.css" />
     <!-- Prism.js for syntax highlighting -->
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css"
@@ -133,6 +137,7 @@
       </div>
 
       <div class="demo-controls">
+        <button id="btn-toggle-theme">Toggle Dark/Light</button>
         <button id="btn-markdown">Get Markdown</button>
         <button id="btn-html">Get HTML</button>
         <button id="btn-both">Get Both</button>

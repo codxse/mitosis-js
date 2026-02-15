@@ -6,21 +6,42 @@ export class Editor {
   private layout: TwoPanelLayout
   private container: HTMLElement
   private options: EditorOptions
+  private wrapper: HTMLDivElement
+  private currentTheme: 'light' | 'dark' = 'light'
+  private mediaQuery: MediaQueryList | null = null
+  private themeChangeHandler: (() => void) | null = null
 
   constructor(options: EditorOptions) {
     this.options = options
     this.container = options.container
+    const theme = options.theme ?? 'auto'
 
-    const wrapper = document.createElement('div')
-    wrapper.className = 'mitosis-editor-wrapper'
-    Object.assign(wrapper.style, {
+    this.wrapper = document.createElement('div')
+    this.wrapper.className = 'mitosis-editor-wrapper'
+    Object.assign(this.wrapper.style, {
       width: '100%',
       height: '600px',
       position: 'relative',
     })
 
+    if (options.cssVars) {
+      for (const [key, value] of Object.entries(options.cssVars)) {
+        this.wrapper.style.setProperty(key, value)
+      }
+    }
+
+    this.applyTheme(theme)
+
+    if (theme === 'auto') {
+      this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      this.themeChangeHandler = () => {
+        this.applyTheme('auto')
+      }
+      this.mediaQuery.addEventListener('change', this.themeChangeHandler)
+    }
+
     const layoutConfig: { container: HTMLElement; initialContent?: string; prism?: object } = {
-      container: wrapper,
+      container: this.wrapper,
     }
     if (options.content !== undefined) {
       layoutConfig.initialContent = options.content
@@ -31,7 +52,37 @@ export class Editor {
 
     this.layout = new TwoPanelLayout(layoutConfig)
 
-    this.container.appendChild(wrapper)
+    this.container.appendChild(this.wrapper)
+  }
+
+  private applyTheme(theme: 'light' | 'dark' | 'auto'): void {
+    if (theme === 'auto') {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      this.currentTheme = isDark ? 'dark' : 'light'
+    } else {
+      this.currentTheme = theme
+    }
+    this.wrapper.setAttribute('data-theme', this.currentTheme)
+  }
+
+  setTheme(theme: 'light' | 'dark' | 'auto'): void {
+    this.applyTheme(theme)
+    if (theme !== 'auto' && this.mediaQuery && this.themeChangeHandler) {
+      this.mediaQuery.removeEventListener('change', this.themeChangeHandler)
+      this.mediaQuery = null
+      this.themeChangeHandler = null
+    }
+    if (theme === 'auto') {
+      this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+      this.themeChangeHandler = () => {
+        this.applyTheme('auto')
+      }
+      this.mediaQuery.addEventListener('change', this.themeChangeHandler)
+    }
+  }
+
+  getTheme(): 'light' | 'dark' {
+    return this.currentTheme
   }
 
   getMarkdown(): string {
@@ -56,6 +107,9 @@ export class Editor {
 
   destroy(): void {
     this.layout.destroy()
+    if (this.mediaQuery && this.themeChangeHandler) {
+      this.mediaQuery.removeEventListener('change', this.themeChangeHandler)
+    }
     this.container.innerHTML = ''
   }
 }

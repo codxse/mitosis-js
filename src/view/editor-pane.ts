@@ -59,7 +59,7 @@ export class EditorPane {
       lineHeight: '1.6',
       background: 'transparent',
       color: 'transparent',
-      caretColor: '#000',
+      caretColor: 'var(--editor-caret)',
       zIndex: '2',
     })
 
@@ -80,6 +80,7 @@ export class EditorPane {
       wordWrap: 'break-word',
       overflow: 'auto',
       zIndex: '1',
+      color: 'var(--editor-text)',
     })
 
     this.textarea.addEventListener('input', () => this.handleInput())
@@ -179,15 +180,15 @@ export class EditorPane {
   private getStyles(): string {
     return `
       .editor-pane-container {
-        border: 1px solid #e0e0e0;
+        border: 1px solid var(--editor-border);
         border-radius: 4px;
-        background: #ffffff;
+        background: var(--editor-bg);
       }
       .editor-textarea::placeholder {
-        color: #999;
+        color: var(--editor-placeholder);
       }
       .editor-textarea::selection {
-        background: #b3d9ff;
+        background: var(--editor-selection);
       }
     `
   }

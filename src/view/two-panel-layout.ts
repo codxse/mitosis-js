@@ -44,7 +44,7 @@ export class TwoPanelLayout {
     Object.assign(this.divider.style, {
       width: '8px',
       cursor: 'col-resize',
-      background: '#e0e0e0',
+      background: 'var(--divider-bg)',
       position: 'relative',
       flexShrink: '0',
     })
@@ -111,7 +111,7 @@ export class TwoPanelLayout {
 
   private startDrag(): void {
     this.isDragging = true
-    this.divider.style.background = '#0366d6'
+    this.divider.style.background = 'var(--divider-hover)'
   }
 
   private handleDrag(e: MouseEvent): void {
@@ -130,7 +130,7 @@ export class TwoPanelLayout {
   private stopDrag(): void {
     if (this.isDragging) {
       this.isDragging = false
-      this.divider.style.background = '#e0e0e0'
+      this.divider.style.background = 'var(--divider-bg)'
     }
   }
 
@@ -159,12 +159,12 @@ export class TwoPanelLayout {
   private getStyles(): string {
     return `
       .two-panel-layout {
-        border: 1px solid #e0e0e0;
+        border: 1px solid var(--editor-border);
         border-radius: 4px;
         overflow: hidden;
       }
       .panel-divider:hover {
-        background: #bdbdbd !important;
+        background: var(--divider-hover) !important;
       }
     `
   }

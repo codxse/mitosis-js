@@ -2,9 +2,10 @@ export interface EditorOptions {
   container: HTMLElement
   content?: string
   readonly?: boolean
-  theme?: 'light' | 'dark'
+  theme?: 'light' | 'dark' | 'auto'
   placeholder?: string
   prism?: object
+  cssVars?: Record<string, string>
 }
 
 export interface EditorOutput {

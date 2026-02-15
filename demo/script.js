@@ -97,6 +97,14 @@ try {
     container: document.getElementById('editor'),
     content: sampleMarkdown,
     prism: window.Prism,
+    theme: 'dark'
+  })
+
+  let currentTheme = 'dark'
+  document.getElementById('btn-toggle-theme').addEventListener('click', () => {
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark'
+    editor.setTheme(currentTheme)
+    console.log('Theme:', currentTheme, '| getTheme():', editor.getTheme())
   })
 
   document.getElementById('btn-markdown').addEventListener('click', () => {

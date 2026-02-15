@@ -1,4 +1,4 @@
-.mitosis-editor-wrapper {
+.mitosis-editor-wrapper[data-theme="light"] {
   --editor-bg: #ffffff;
   --editor-text: #282a36;
   --editor-border: #e0e0e0;
@@ -12,12 +12,4 @@
   --preview-link: #0366d6;
   --divider-bg: #e0e0e0;
   --divider-hover: #bdbdbd;
-  font-family: system-ui, -apple-system, sans-serif;
-  box-sizing: border-box;
-}
-
-.mitosis-editor-wrapper *,
-.mitosis-editor-wrapper *::before,
-.mitosis-editor-wrapper *::after {
-  box-sizing: inherit;
 }
