@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mitosis JS Demo - Markdown Editor</title>
+  <!-- Prism.js for syntax highlighting -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
   <style>
     :root {
       --max-content-width: 100%;
@@ -97,7 +99,7 @@
 <body>
   <div class="demo-header">
     <h1>Mitosis JS Demo - Markdown Editor</h1>
-    <p>Write markdown on the left, see live preview on the right. Drag the divider to resize panels.</p>
+    <p>Write markdown on the left, see live preview on the right. Code blocks are syntax-highlighted with Prism.js.</p>
     
     <div class="shortcuts-info">
       <strong>Keyboard Shortcuts:</strong>
@@ -129,6 +131,11 @@
     <pre id="output-content"></pre>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
   <script type="module" src="./script.js"></script>
 </body>
 </html>

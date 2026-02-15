@@ -7,12 +7,12 @@ A **framework-agnostic** markdown editor with a beautiful split-view interface.
 ## Features
 
 - **Live Preview**: See your markdown rendered instantly
-- **Syntax Highlighting**: Easy-to-read markdown highlighting
+- **Code Highlighting**: Syntax highlighting for code blocks using Prism.js
 - **Scroll Sync**: Panels stay in sync as you scroll
 - **Resizable Panels**: Drag the divider to adjust panel sizes
 - **Framework Agnostic**: Works with React, Vue, Svelte, or vanilla JS
 
-## Code Example
+## Code Examples
 
 \`\`\`javascript
 function createEditor(options) {
@@ -23,6 +23,38 @@ const editor = createEditor({
   container: document.getElementById('editor'),
   content: '# Hello World'
 });
+\`\`\`
+
+### TypeScript
+\`\`\`typescript
+interface EditorOptions {
+  container: HTMLElement;
+  content?: string;
+  prism?: PrismInstance;
+}
+
+const editor: Editor = createEditor({
+  container,
+  content: '# TypeScript demo',
+  prism
+});
+\`\`\`
+
+### Python
+\`\`\`python
+def create_editor(container: str, content: str = "") -> Editor:
+    return Editor(container=container, content=content)
+
+editor = create_editor("#editor", "Hello World")
+\`\`\`
+
+### CSS
+\`\`\`css
+.editor-container {
+  display: flex;
+  height: 500px;
+  border: 1px solid #ccc;
+}
 \`\`\`
 
 ## Lists
@@ -55,7 +87,7 @@ const editor = createEditor({
 
 ---
 
-*Start typing in the editor to see the magic!*
+*Start typing in the editor to see the syntax highlighting!*
 `;
 
 let editor;
@@ -63,7 +95,8 @@ let editor;
 try {
   editor = createEditor({
     container: document.getElementById('editor'),
-    content: sampleMarkdown
+    content: sampleMarkdown,
+    prism: window.Prism
   });
 
   document.getElementById('btn-markdown').addEventListener('click', () => {
