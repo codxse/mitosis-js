@@ -2,10 +2,9 @@ export default {
   plugins: {
     '@release-it/conventional-changelog': {
       infile: 'CHANGELOG.md',
-      preset: {
-        name: 'angular',
-      },
+      preset: 'angular',
       ignoreRecommendedBump: true,
+      releaseAs: 'minor',
     },
   },
   git: {
