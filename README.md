@@ -103,11 +103,15 @@ const editor = createEditor({
 | `--editor-text` | Editor text color | #282a36 | #f8f8f2 |
 | `--editor-border` | Editor border | #e0e0e0 | #44475a |
 | `--editor-caret` | Cursor color | #000000 | #f8f8f2 |
+| `--editor-placeholder` | Placeholder text | #999999 | #6272a4 |
+| `--editor-selection` | Selection background | #b3d9ff | #44475a |
 | `--preview-bg` | Preview background | #ffffff | #282a36 |
 | `--preview-text` | Preview text | #282a36 | #f8f8f2 |
+| `--preview-border` | Preview border | #e0e0e0 | #44475a |
 | `--preview-code-bg` | Code block background | #f6f8fa | #44475a |
 | `--preview-link` | Link color | #0366d6 | #8be9fd |
 | `--divider-bg` | Divider color | #e0e0e0 | #44475a |
+| `--divider-hover` | Divider hover | #bdbdbd | #6272a4 |
 
 ## Installation
 
