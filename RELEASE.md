@@ -41,18 +41,25 @@ pnpm release
 
 standard-version will analyze your commits since last release and determine the appropriate bump.
 
-### Force specific version bump
+### Using shortcuts
 
 ```bash
 # Patch release (1.2.0 → 1.2.1)
-pnpm release -- --release-as patch
+pnpm run release:patch
 
 # Minor release (1.2.0 → 1.3.0)
-pnpm release -- --release-as minor
+pnpm run release:minor
 
 # Major release (1.2.0 → 2.0.0)
-pnpm release -- --release-as major
+pnpm run release:major
 
+# Dry run (preview only)
+pnpm run release:dry
+```
+
+### Force specific version bump
+
+```bash
 # Specific version
 pnpm release -- --release-as 2.0.0
 ```
