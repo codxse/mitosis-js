@@ -11,13 +11,26 @@ This project uses [standard-version](https://github.com/conventional-changelog/s
 
 We follow [Conventional Commits](https://www.conventionalcommits.org/):
 
+### Version Bump Rules
+
 | Type | Description | Version Bump |
 |------|-------------|--------------|
 | `feat:` | New feature | minor (x.**y**.z) |
 | `fix:` | Bug fix | patch (x.y.**z**) |
 | `BREAKING CHANGE:` | Breaking change | major (**x**.y.z) |
 
-Other types (`chore:`, `docs:`, `refactor:`, etc.) won't trigger a version bump.
+### All Supported Types
+
+| Type | Description | In Changelog? |
+|------|-------------|---------------|
+| `feat:` | New feature | Yes |
+| `fix:` | Bug fix | Yes |
+| `chore:` | Maintenance | No |
+| `docs:` | Documentation | No |
+| `style:` | Styles (formatting) | No |
+| `refactor:` | Code refactoring | No |
+| `perf:` | Performance improvements | No |
+| `test:` | Tests | No |
 
 ### Examples
 
