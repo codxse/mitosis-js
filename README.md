@@ -54,17 +54,17 @@ pnpm add @codxse/mitosis-js
 
 ```js
 // Dark mode
-import '@codxse/mitosis-js/dist/styles/editor.css'
-import '@codxse/mitosis-js/dist/styles/theme-dark.css'
+import '@codxse/mitosis-js/dist/styles/editor.min.css'
+import '@codxse/mitosis-js/dist/styles/theme-dark.min.css'
 
 // Light mode
-import '@codxse/mitosis-js/dist/styles/editor.css'
-import '@codxse/mitosis-js/dist/styles/theme-light.css'
+import '@codxse/mitosis-js/dist/styles/editor.min.css'
+import '@codxse/mitosis-js/dist/styles/theme-light.min.css'
 
 // Auto (follows system preference)
-import '@codxse/mitosis-js/dist/styles/editor.css'
-import '@codxse/mitosis-js/dist/styles/theme-light.css'
-import '@codxse/mitosis-js/dist/styles/theme-dark.css'
+import '@codxse/mitosis-js/dist/styles/editor.min.css'
+import '@codxse/mitosis-js/dist/styles/theme-light.min.css'
+import '@codxse/mitosis-js/dist/styles/theme-dark.min.css'
 ```
 
 ### Theme Options
@@ -131,7 +131,7 @@ pnpm add prismjs
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" href="node_modules/@codxse/mitosis-js/dist/styles/editor.css" />
+    <link rel="stylesheet" href="node_modules/@codxse/mitosis-js/dist/styles/editor.min.css" />
   </head>
   <body>
     <div id="editor"></div>

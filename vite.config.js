@@ -5,8 +5,8 @@ import fs from 'node:fs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-// Copy CSS from src/styles to demo/public/styles before serve
-const srcStyles = path.resolve(__dirname, 'src/styles')
+// Copy minified CSS from dist/styles to demo/public/styles
+const srcStyles = path.resolve(__dirname, 'dist/styles')
 const destStyles = path.resolve(__dirname, 'demo/public/styles')
 
 if (fs.existsSync(srcStyles)) {

@@ -14,8 +14,9 @@ fs.mkdirSync(destDir, { recursive: true });
 
 for (const file of files) {
   const src = path.join(srcDir, file);
-  const dest = path.join(destDir, file);
+  const baseName = file.replace('.css', '');
+  const dest = path.join(destDir, `${baseName}.min.css`);
 
   execSync(`cleancss -o ${dest} ${src}`, { stdio: 'inherit' });
-  console.log(`Minified: ${file}`);
+  console.log(`Minified: ${baseName}.min.css`);
 }
