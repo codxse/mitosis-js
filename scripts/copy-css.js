@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { execSync } from 'node:child_process';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const rootDir = path.join(__dirname, '..');
@@ -14,6 +15,7 @@ fs.mkdirSync(destDir, { recursive: true });
 for (const file of files) {
   const src = path.join(srcDir, file);
   const dest = path.join(destDir, file);
-  fs.copyFileSync(src, dest);
-  console.log(`Copied: ${file}`);
+
+  execSync(`cleancss -o ${dest} ${src}`, { stdio: 'inherit' });
+  console.log(`Minified: ${file}`);
 }
