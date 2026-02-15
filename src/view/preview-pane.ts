@@ -38,6 +38,8 @@ export class PreviewPane {
       padding: '16px',
       overflow: 'auto',
       flex: '1',
+      background: 'var(--preview-bg)',
+      color: 'var(--preview-text)',
     })
 
     this.content.addEventListener('scroll', this.scrollHandler)
@@ -63,9 +65,9 @@ export class PreviewPane {
   private getStyles(): string {
     return `
       .preview-pane {
-        border: 1px solid #e0e0e0;
+        border: 1px solid var(--preview-border);
         border-radius: 4px;
-        background: #ffffff;
+        background: var(--preview-bg);
       }
       .preview-content h1,
       .preview-content h2,
@@ -78,24 +80,24 @@ export class PreviewPane {
         font-weight: 600;
         line-height: 1.25;
       }
-      .preview-content h1 { font-size: 2em; border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
-      .preview-content h2 { font-size: 1.5em; border-bottom: 1px solid #eee; padding-bottom: 0.3em; }
+      .preview-content h1 { font-size: 2em; border-bottom: 1px solid var(--preview-border); padding-bottom: 0.3em; }
+      .preview-content h2 { font-size: 1.5em; border-bottom: 1px solid var(--preview-border); padding-bottom: 0.3em; }
       .preview-content h3 { font-size: 1.25em; }
       .preview-content h4 { font-size: 1em; }
       .preview-content h5 { font-size: 0.875em; }
-      .preview-content h6 { font-size: 0.85em; color: #6a737d; }
+      .preview-content h6 { font-size: 0.85em; color: var(--preview-text); opacity: 0.7; }
       .preview-content p { margin: 1em 0; }
       .preview-content ul, .preview-content ol { padding-left: 2em; margin: 1em 0; }
       .preview-content li { margin: 0.25em 0; }
       .preview-content code {
-        background: #f6f8fa;
+        background: var(--preview-code-bg);
         padding: 0.2em 0.4em;
         border-radius: 3px;
         font-family: ui-monospace, monospace;
         font-size: 0.9em;
       }
       .preview-content pre {
-        background: #f6f8fa;
+        background: var(--preview-code-bg);
         padding: 16px;
         border-radius: 6px;
         overflow: auto;
@@ -106,9 +108,10 @@ export class PreviewPane {
         padding: 0;
       }
       .preview-content blockquote {
-        border-left: 4px solid #dfe2e5;
+        border-left: 4px solid var(--preview-border);
         padding-left: 1em;
-        color: #6a737d;
+        color: var(--preview-text);
+        opacity: 0.7;
         margin: 1em 0;
       }
       .preview-content img {
@@ -116,7 +119,7 @@ export class PreviewPane {
         height: auto;
       }
       .preview-content a {
-        color: #0366d6;
+        color: var(--preview-link);
         text-decoration: none;
       }
       .preview-content a:hover {
@@ -124,7 +127,7 @@ export class PreviewPane {
       }
       .preview-content hr {
         border: none;
-        border-top: 1px solid #e1e4e8;
+        border-top: 1px solid var(--preview-border);
         margin: 2em 0;
       }
     `
