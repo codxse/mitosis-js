@@ -1,0 +1,20 @@
+.mitosis-editor-wrapper[data-theme="dark"] {
+  /* Editor pane */
+  --editor-bg: #282a36;
+  --editor-text: #f8f8f2;
+  --editor-border: #44475a;
+  --editor-caret: #f8f8f2;
+  --editor-placeholder: #6272a4;
+  --editor-selection: #44475a;
+
+  /* Preview pane */
+  --preview-bg: #282a36;
+  --preview-text: #f8f8f2;
+  --preview-border: #44475a;
+  --preview-code-bg: #44475a;
+  --preview-link: #8be9fd;
+
+  /* Layout */
+  --divider-bg: #44475a;
+  --divider-hover: #6272a4;
+}
