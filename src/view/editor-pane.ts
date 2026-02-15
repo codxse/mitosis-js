@@ -148,14 +148,23 @@ export class EditorPane {
     const newText = prefix + selectedText + suffix
     this.textarea.value = value.substring(0, start) + newText + value.substring(end)
 
+    this.setCursorAfterWrap(selectedText, start, prefix, newText)
+    this.textarea.focus()
+    this.handleInput()
+  }
+
+  private setCursorAfterWrap(
+    selectedText: string,
+    start: number,
+    prefix: string,
+    newText: string
+  ): void {
     if (selectedText.length === 0) {
       this.textarea.selectionStart = this.textarea.selectionEnd = start + prefix.length
     } else {
       this.textarea.selectionStart = start
       this.textarea.selectionEnd = start + newText.length
     }
-    this.textarea.focus()
-    this.handleInput()
   }
 
   setContent(content: string): void {
