@@ -1,4 +1,23 @@
 .mitosis-editor-wrapper {
+  /* Editor pane */
+  --editor-bg: #ffffff;
+  --editor-text: #282a36;
+  --editor-border: #e0e0e0;
+  --editor-caret: #000000;
+  --editor-placeholder: #999999;
+  --editor-selection: #b3d9ff;
+
+  /* Preview pane */
+  --preview-bg: #ffffff;
+  --preview-text: #282a36;
+  --preview-border: #e0e0e0;
+  --preview-code-bg: #f6f8fa;
+  --preview-link: #0366d6;
+
+  /* Layout */
+  --divider-bg: #e0e0e0;
+  --divider-hover: #bdbdbd;
+
   font-family:
     system-ui,
     -apple-system,
