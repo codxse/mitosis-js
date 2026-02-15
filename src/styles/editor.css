@@ -1,0 +1,10 @@
+.mitosis-editor-wrapper {
+  font-family: system-ui, -apple-system, sans-serif;
+  box-sizing: border-box;
+}
+
+.mitosis-editor-wrapper *,
+.mitosis-editor-wrapper *::before,
+.mitosis-editor-wrapper *::after {
+  box-sizing: inherit;
+}
