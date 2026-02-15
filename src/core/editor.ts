@@ -9,6 +9,7 @@ export class Editor {
   private wrapper: HTMLDivElement
   private currentTheme: 'light' | 'dark' = 'light'
   private mediaQuery: MediaQueryList | null = null
+  private themeChangeHandler: (() => void) | null = null
 
   constructor(options: EditorOptions) {
     this.options = options
@@ -36,9 +37,10 @@ export class Editor {
     // Listen for system theme changes if auto
     if (theme === 'auto') {
       this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      this.mediaQuery.addEventListener('change', () => {
+      this.themeChangeHandler = () => {
         this.applyTheme('auto')
-      })
+      }
+      this.mediaQuery.addEventListener('change', this.themeChangeHandler)
     }
 
     const layoutConfig: { container: HTMLElement; initialContent?: string; prism?: object } = {
@@ -68,15 +70,17 @@ export class Editor {
 
   setTheme(theme: 'light' | 'dark' | 'auto'): void {
     this.applyTheme(theme)
-    if (theme !== 'auto' && this.mediaQuery) {
-      this.mediaQuery.removeEventListener('change', () => {})
+    if (theme !== 'auto' && this.mediaQuery && this.themeChangeHandler) {
+      this.mediaQuery.removeEventListener('change', this.themeChangeHandler)
       this.mediaQuery = null
+      this.themeChangeHandler = null
     }
     if (theme === 'auto') {
       this.mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
-      this.mediaQuery.addEventListener('change', () => {
+      this.themeChangeHandler = () => {
         this.applyTheme('auto')
-      })
+      }
+      this.mediaQuery.addEventListener('change', this.themeChangeHandler)
     }
   }
 
@@ -106,8 +110,8 @@ export class Editor {
 
   destroy(): void {
     this.layout.destroy()
-    if (this.mediaQuery) {
-      this.mediaQuery.removeEventListener('change', () => {})
+    if (this.mediaQuery && this.themeChangeHandler) {
+      this.mediaQuery.removeEventListener('change', this.themeChangeHandler)
     }
     this.container.innerHTML = ''
   }
