@@ -1,4 +1,12 @@
 export default {
+  plugins: {
+    '@release-it/conventional-changelog': {
+      infile: 'CHANGELOG.md',
+      preset: {
+        name: 'angular',
+      },
+    },
+  },
   git: {
     commitMessage: 'chore: release v${version}',
     requireCleanWorkingDir: true,
