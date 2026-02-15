@@ -12,6 +12,26 @@ A framework-agnostic markdown editor with a split-view interface, optimized for 
 - **Framework Agnostic**: Works with React, Vue, Svelte, or vanilla JavaScript
 - **Lightweight**: Simple markdown-to-HTML conversion using [`marked`](https://github.com/markedjs/marked)
 
+## Syntax Highlighting
+
+Code blocks in the preview can be syntax-highlighted using Prism.js. Provide your configured Prism instance via the `prism` option:
+
+```jsx
+import { createEditor } from '@codxse/mitosis-js';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-typescript';
+import 'prismjs/themes/prism-tomorrow.css';
+
+const editor = createEditor({
+  container: document.getElementById('editor'),
+  content: '# Hello\n```js\nconst x = 1;\n```',
+  prism: Prism  // Optional - without this, code blocks render without highlighting
+});
+```
+
+**Note:** You must install Prism.js and the language components you need separately. Prism is not bundled with this package.
+
 ## Keyboard Shortcuts
 
 | Shortcut | Action |
@@ -26,7 +46,11 @@ A framework-agnostic markdown editor with a split-view interface, optimized for 
 ## Installation
 
 ```bash
+# Core package
 pnpm add @codxse/mitosis-js
+
+# Optional: for syntax highlighting in code blocks
+pnpm add prismjs
 ```
 
 ## Usage
@@ -125,6 +149,7 @@ Creates a new markdown editor instance.
 **Options:**
 - `container: HTMLElement` - The DOM element to mount the editor into
 - `content?: string` - Initial markdown content
+- `prism?: object` - Optional Prism.js instance for syntax highlighting code blocks
 
 ### Methods
 
