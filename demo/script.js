@@ -97,6 +97,7 @@ try {
     container: document.getElementById('editor'),
     content: sampleMarkdown,
     prism: window.Prism,
+    theme: 'dark'
   })
 
   document.getElementById('btn-markdown').addEventListener('click', () => {
