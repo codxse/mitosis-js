@@ -27,6 +27,9 @@ importers:
       '@vitest/ui':
         specifier: ^3.1.5
         version: 3.2.4(vitest@3.2.4)
+      conventional-changelog:
+        specifier: ^7.1.1
+        version: 7.1.1(conventional-commits-filter@5.0.0)
       eslint:
         specifier: ^9.18.0
         version: 9.39.2(jiti@2.6.1)
