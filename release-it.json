@@ -22,5 +22,6 @@ export default {
   },
   hooks: {
     'before:init': ['pnpm test', 'pnpm run build'],
+    'after:bump': 'pnpm exec conventional-changelog -p angular -i CHANGELOG.md -s',
   },
 }
