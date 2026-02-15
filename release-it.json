@@ -3,6 +3,8 @@ export default {
     '@release-it/conventional-changelog': {
       infile: 'CHANGELOG.md',
       preset: 'angular',
+      ignoreRecommendedBump: true,
+      outputUnreleased: true,
     },
   },
   git: {
