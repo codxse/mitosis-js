@@ -11,3 +11,4 @@ import { Editor } from './core/editor.js'
 export function createEditor(options: { container: HTMLElement; content?: string }): Editor {
   return new Editor(options)
 }
+// test
