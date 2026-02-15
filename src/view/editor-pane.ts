@@ -7,11 +7,11 @@ interface Shortcut {
 }
 
 const SHORTCUTS: Shortcut[] = [
-  { key: 'b', syntax: { prefix: '**', suffix: '**' } }, // Bold
-  { key: 'i', syntax: { prefix: '*', suffix: '*' } }, // Italic
-  { key: 'k', syntax: { prefix: '[', suffix: '](url)' } }, // Link
-  { key: 'e', syntax: { prefix: '`', suffix: '`' } }, // Inline code
-  { key: 's', shiftKey: true, syntax: { prefix: '~~', suffix: '~~' } }, // Strikethrough
+  { key: 'b', syntax: { prefix: '**', suffix: '**' } },
+  { key: 'i', syntax: { prefix: '*', suffix: '*' } },
+  { key: 'k', syntax: { prefix: '[', suffix: '](url)' } },
+  { key: 'e', syntax: { prefix: '`', suffix: '`' } },
+  { key: 's', shiftKey: true, syntax: { prefix: '~~', suffix: '~~' } },
 ]
 
 export class EditorPane {
@@ -104,14 +104,12 @@ export class EditorPane {
   }
 
   private handleKeyDown(e: KeyboardEvent): void {
-    // Tab handling
     if (e.key === 'Tab') {
       e.preventDefault()
       this.insertText('  ')
       return
     }
 
-    // Keyboard shortcuts
     for (const shortcut of SHORTCUTS) {
       if (
         e.key === shortcut.key &&
@@ -150,7 +148,6 @@ export class EditorPane {
     const newText = prefix + selectedText + suffix
     this.textarea.value = value.substring(0, start) + newText + value.substring(end)
 
-    // Position cursor after the suffix if no text was selected, otherwise select the wrapped text
     if (selectedText.length === 0) {
       this.textarea.selectionStart = this.textarea.selectionEnd = start + prefix.length
     } else {
