@@ -6,7 +6,7 @@
   /* Layout */
   --editor-padding: 16px;
   --editor-border-radius: 4px;
-  --divider-width: 8px;
+  --divider-width: 2px;
 
   /* Typography */
   --editor-font-family: ui-monospace, monospace;
@@ -27,6 +27,12 @@
   --preview-link: #0366d6;
   --divider-bg: #e0e0e0;
   --divider-hover: #bdbdbd;
+
+  /* Scrollbar */
+  --scrollbar-width: 6px;
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: #c1c1c1;
+  --scrollbar-thumb-hover: #a8a8a8;
 
   width: var(--editor-width);
   height: var(--editor-height);
@@ -49,6 +55,9 @@
   border: 1px solid var(--editor-border);
   border-radius: var(--editor-border-radius);
   background: var(--editor-bg);
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  border-right: 0;
 }
 
 .mitosis-textarea {
@@ -105,6 +114,9 @@
   border: 1px solid var(--preview-border);
   border-radius: var(--editor-border-radius);
   background: var(--preview-bg);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
 }
 
 .mitosis-preview-content {
@@ -240,11 +252,31 @@
 .mitosis-divider {
   width: var(--divider-width);
   cursor: col-resize;
-  background: var(--divider-bg);
+  border-left: 3px solid var(--divider-bg);
   position: relative;
   flex-shrink: 0;
+  transition: border-color 0.15s ease;
 }
 
 .mitosis-divider:hover {
-  background: var(--divider-hover) !important;
+  border-color: var(--divider-hover);
+}
+
+/* Scrollbar */
+.mitosis-editor-wrapper ::-webkit-scrollbar {
+  width: var(--scrollbar-width);
+  height: var(--scrollbar-width);
+}
+
+.mitosis-editor-wrapper ::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+.mitosis-editor-wrapper ::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+}
+
+.mitosis-editor-wrapper ::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
 }
