@@ -19,45 +19,17 @@ export class TwoPanelLayout {
       this.prism = config.prism
     }
     this.container = document.createElement('div')
-    this.container.className = 'two-panel-layout'
-    Object.assign(this.container.style, {
-      display: 'flex',
-      height: '100%',
-      gap: '0',
-    })
-
-    const styleEl = document.createElement('style')
-    styleEl.textContent = this.getStyles()
-    this.container.appendChild(styleEl)
+    this.container.className = 'mitosis-layout'
 
     this.editorPaneContainer = document.createElement('div')
-    this.editorPaneContainer.className = 'panel editor-panel'
-    Object.assign(this.editorPaneContainer.style, {
-      flex: '1',
-      minHeight: '0',
-      display: 'flex',
-      flexDirection: 'column',
-    })
+    this.editorPaneContainer.className = 'mitosis-panel editor-panel'
 
     this.divider = document.createElement('div')
-    this.divider.className = 'panel-divider'
-    Object.assign(this.divider.style, {
-      width: '8px',
-      cursor: 'col-resize',
-      background: 'var(--divider-bg)',
-      position: 'relative',
-      flexShrink: '0',
-    })
+    this.divider.className = 'mitosis-divider'
     this.divider.addEventListener('mousedown', () => this.startDrag())
 
     this.previewPaneContainer = document.createElement('div')
-    this.previewPaneContainer.className = 'panel preview-panel'
-    Object.assign(this.previewPaneContainer.style, {
-      flex: '1',
-      minHeight: '0',
-      display: 'flex',
-      flexDirection: 'column',
-    })
+    this.previewPaneContainer.className = 'mitosis-panel preview-panel'
 
     this.editorPane = new EditorPane({
       container: this.editorPaneContainer,
@@ -154,19 +126,6 @@ export class TwoPanelLayout {
     this.content = content
     this.editorPane.setContent(content)
     this.previewPane.setContent(content)
-  }
-
-  private getStyles(): string {
-    return `
-      .two-panel-layout {
-        border: 1px solid var(--editor-border);
-        border-radius: 4px;
-        overflow: hidden;
-      }
-      .panel-divider:hover {
-        background: var(--divider-hover) !important;
-      }
-    `
   }
 
   destroy(): void {

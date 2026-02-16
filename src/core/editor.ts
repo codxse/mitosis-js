@@ -18,11 +18,6 @@ export class Editor {
 
     this.wrapper = document.createElement('div')
     this.wrapper.className = 'mitosis-editor-wrapper'
-    Object.assign(this.wrapper.style, {
-      width: '100%',
-      height: '600px',
-      position: 'relative',
-    })
 
     if (options.cssVars) {
       for (const [key, value] of Object.entries(options.cssVars)) {

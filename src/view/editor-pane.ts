@@ -1,4 +1,4 @@
-import { highlightMarkdown, getHighlightStyles } from '../highlight/markdown.js'
+import { highlightMarkdown } from '../highlight/markdown.js'
 
 interface Shortcut {
   key: string
@@ -30,58 +30,14 @@ export class EditorPane {
     this.onScroll = config.onScroll ?? (() => {})
 
     this.container = document.createElement('div')
-    this.container.className = 'editor-pane-container'
-    Object.assign(this.container.style, {
-      position: 'relative',
-      height: '100%',
-      overflow: 'hidden',
-    })
-
-    const styleEl = document.createElement('style')
-    styleEl.textContent = this.getStyles() + getHighlightStyles()
-    this.container.appendChild(styleEl)
+    this.container.className = 'mitosis-editor-container'
 
     this.textarea = document.createElement('textarea')
-    this.textarea.className = 'editor-textarea'
+    this.textarea.className = 'mitosis-textarea'
     this.textarea.placeholder = 'Write markdown here...'
-    Object.assign(this.textarea.style, {
-      position: 'absolute',
-      top: '0',
-      left: '0',
-      width: '100%',
-      height: '100%',
-      padding: '16px',
-      border: 'none',
-      outline: 'none',
-      resize: 'none',
-      fontFamily: 'ui-monospace, monospace',
-      fontSize: '14px',
-      lineHeight: '1.6',
-      background: 'transparent',
-      color: 'transparent',
-      caretColor: 'var(--editor-caret)',
-      zIndex: '2',
-    })
 
     this.highlightOverlay = document.createElement('div')
-    this.highlightOverlay.className = 'editor-highlight'
-    Object.assign(this.highlightOverlay.style, {
-      position: 'absolute',
-      top: '0',
-      left: '0',
-      width: '100%',
-      height: '100%',
-      padding: '16px',
-      pointerEvents: 'none',
-      fontFamily: 'ui-monospace, monospace',
-      fontSize: '14px',
-      lineHeight: '1.6',
-      whiteSpace: 'pre-wrap',
-      wordWrap: 'break-word',
-      overflow: 'auto',
-      zIndex: '1',
-      color: 'var(--editor-text)',
-    })
+    this.highlightOverlay.className = 'mitosis-highlight'
 
     this.textarea.addEventListener('input', () => this.handleInput())
     this.textarea.addEventListener('scroll', () => this.handleScroll())
@@ -175,22 +131,6 @@ export class EditorPane {
 
   getContent(): string {
     return this.textarea.value
-  }
-
-  private getStyles(): string {
-    return `
-      .editor-pane-container {
-        border: 1px solid var(--editor-border);
-        border-radius: 4px;
-        background: var(--editor-bg);
-      }
-      .editor-textarea::placeholder {
-        color: var(--editor-placeholder);
-      }
-      .editor-textarea::selection {
-        background: var(--editor-selection);
-      }
-    `
   }
 
   destroy(): void {
