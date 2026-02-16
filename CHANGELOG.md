@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.6.0](https://github.com/codxse/mitosis-js/compare/v1.5.1...v1.6.0) (2026-02-16)
+
+
+### Features
+
+* improve editor styling with scrollbar, divider, and border fixes ([9a6838a](https://github.com/codxse/mitosis-js/commit/9a6838a1c4ab9ee930e9cdf4df285a51a89fa103))
+
 ### [1.5.1](https://github.com/codxse/mitosis-js/compare/v1.5.0...v1.5.1) (2026-02-15)
 
 
