@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.1](https://github.com/codxse/mitosis-js/compare/v1.6.0...v1.6.1) (2026-02-17)
+
+
+### Bug Fixes
+
+* fix panel styling visual error ([da9a0e3](https://github.com/codxse/mitosis-js/commit/da9a0e39f414cce35e578106e98eeca2193cb0de))
+
 ## [1.6.0](https://github.com/codxse/mitosis-js/compare/v1.5.1...v1.6.0) (2026-02-16)
 
 
