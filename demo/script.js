@@ -22,6 +22,7 @@ function createEditor(options) {
 const editor = createEditor({
   container: document.getElementById('editor'),
   content: '# Hello World'
+  // dasdaasdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 });
 \`\`\`
 
