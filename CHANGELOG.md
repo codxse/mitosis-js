@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.6.2](https://github.com/codxse/mitosis-js/compare/v1.6.1...v1.6.2) (2026-02-18)
+
+
+### Bug Fixes
+
+* fix horizontal long code preview ([e73b55d](https://github.com/codxse/mitosis-js/commit/e73b55d91392b7eb0a61bfbf0e63d9c4520c7139))
+
 ### [1.6.1](https://github.com/codxse/mitosis-js/compare/v1.6.0...v1.6.1) (2026-02-17)
 
 
