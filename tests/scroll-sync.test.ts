@@ -162,4 +162,16 @@ describe('TwoPanelLayout scroll sync', () => {
     // Should clamp to 100% → 1700
     expect(previewContent.scrollTop).toBeCloseTo(1700, 0)
   })
+
+  it('preview scroll does not move editor', () => {
+    const { editor, preview } = setup()
+
+    editor.setScrollTop(400) // 50%
+    textarea.dispatchEvent(new Event('scroll'))
+
+    preview.setScrollTop(1700) // 100%
+    previewContent.dispatchEvent(new Event('scroll'))
+
+    expect(textarea.scrollTop).toBe(400)
+  })
 })
