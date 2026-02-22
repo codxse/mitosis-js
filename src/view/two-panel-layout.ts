@@ -70,6 +70,7 @@ export class TwoPanelLayout {
   private handleEditorUpdate(content: string): void {
     this.content = content
     this.previewPane.setContent(content)
+    this.previewPane.setScrollRatio(this.previewScrollRatio)
   }
 
   private handleEditorScroll(ratio: number): void {

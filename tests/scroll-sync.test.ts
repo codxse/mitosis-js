@@ -163,6 +163,21 @@ describe('TwoPanelLayout scroll sync', () => {
     expect(previewContent.scrollTop).toBeCloseTo(1700, 0)
   })
 
+  it('typing preserves preview scroll position', () => {
+    const { preview } = setup()
+
+    // Preview manually scrolled to 60%
+    preview.setScrollTop(1020) // 1700 * 0.6
+    previewContent.dispatchEvent(new Event('scroll'))
+
+    // User types — simulate by changing textarea value and dispatching input
+    textarea.value = '# Hello\n\nSome new content'
+    textarea.dispatchEvent(new Event('input', { bubbles: true }))
+
+    // Preview should be restored to 60%
+    expect(previewContent.scrollTop).toBeCloseTo(1020, 0)
+  })
+
   it('preview scroll does not move editor', () => {
     const { editor, preview } = setup()
 
