@@ -12,6 +12,8 @@ export class TwoPanelLayout {
   private content = ''
   private isDragging = false
   private prism?: object
+  private previewScrollRatio = 0
+  private lastEditorScrollRatio = 0
 
   constructor(config: { container: HTMLElement; initialContent?: string; prism?: object }) {
     this.content = config.initialContent ?? ''
@@ -34,16 +36,16 @@ export class TwoPanelLayout {
     this.editorPane = new EditorPane({
       container: this.editorPaneContainer,
       onUpdate: (content) => this.handleEditorUpdate(content),
-      onScroll: (scrollTop, scrollHeight) => this.syncScroll(scrollTop, scrollHeight, 'editor'),
+      onScroll: (ratio) => this.handleEditorScroll(ratio),
     })
 
     const previewConfig: {
       container: HTMLDivElement
-      onScroll: (scrollTop: number, scrollHeight: number) => void
+      onScroll: (ratio: number) => void
       prism?: PrismInstance
     } = {
       container: this.previewPaneContainer,
-      onScroll: (scrollTop, scrollHeight) => this.syncScroll(scrollTop, scrollHeight, 'preview'),
+      onScroll: (ratio) => this.handlePreviewScroll(ratio),
     }
     if (this.prism !== undefined) {
       previewConfig.prism = this.prism as PrismInstance
@@ -68,17 +70,18 @@ export class TwoPanelLayout {
   private handleEditorUpdate(content: string): void {
     this.content = content
     this.previewPane.setContent(content)
+    this.previewPane.setScrollRatio(this.previewScrollRatio)
   }
 
-  private syncScroll(scrollTop: number, scrollHeight: number, source: 'editor' | 'preview'): void {
-    if (source === 'editor') {
-      const ratio = scrollTop / scrollHeight
-      this.previewPane.setScrollRatio(ratio)
-    } else {
-      const ratio = scrollTop / scrollHeight
-      const editorScrollTop = ratio * this.editorPaneContainer.scrollHeight
-      this.editorPaneContainer.scrollTop = editorScrollTop
-    }
+  private handleEditorScroll(ratio: number): void {
+    const delta = ratio - this.lastEditorScrollRatio
+    this.lastEditorScrollRatio = ratio
+    this.previewScrollRatio = Math.max(0, Math.min(1, this.previewScrollRatio + delta))
+    this.previewPane.setScrollRatio(this.previewScrollRatio)
+  }
+
+  private handlePreviewScroll(ratio: number): void {
+    this.previewScrollRatio = ratio
   }
 
   private startDrag(): void {

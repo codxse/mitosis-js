@@ -4,13 +4,13 @@ import type { PrismInstance } from '../parser/markdown.js'
 export class PreviewPane {
   private container: HTMLDivElement
   private content: HTMLDivElement
-  private onScroll: (scrollTop: number, scrollHeight: number) => void
+  private onScroll: (ratio: number) => void
   private prism?: PrismInstance
   private scrollHandler: () => void
 
   constructor(config: {
     container: HTMLElement
-    onScroll?: (scrollTop: number, scrollHeight: number) => void
+    onScroll?: (ratio: number) => void
     prism?: PrismInstance
   }) {
     this.onScroll = config.onScroll ?? (() => {})
@@ -32,8 +32,9 @@ export class PreviewPane {
   }
 
   private handleScroll(): void {
-    const { scrollTop, scrollHeight } = this.content
-    this.onScroll(scrollTop, scrollHeight)
+    const { scrollTop, scrollHeight, clientHeight } = this.content
+    const maxScroll = scrollHeight - clientHeight
+    this.onScroll(maxScroll > 0 ? scrollTop / maxScroll : 0)
   }
 
   setContent(markdown: string): void {
