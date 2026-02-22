@@ -4,7 +4,10 @@ interface Shortcut {
   key: string
   shiftKey?: boolean
   syntax: { prefix: string; suffix: string } | string
+  cursorOffset?: number
 }
+
+const FIGURE_TEMPLATE = '<figure>\n  <img src="" alt="">\n  <figcaption></figcaption>\n</figure>'
 
 const SHORTCUTS: Shortcut[] = [
   { key: 'b', syntax: { prefix: '**', suffix: '**' } },
@@ -12,6 +15,7 @@ const SHORTCUTS: Shortcut[] = [
   { key: 'k', syntax: { prefix: '[', suffix: '](url)' } },
   { key: 'e', syntax: { prefix: '`', suffix: '`' } },
   { key: 's', shiftKey: true, syntax: { prefix: '~~', suffix: '~~' } },
+  { key: 'm', syntax: FIGURE_TEMPLATE, cursorOffset: 21 },
 ]
 
 export class EditorPane {
@@ -77,7 +81,7 @@ export class EditorPane {
         e.preventDefault()
 
         if (typeof shortcut.syntax === 'string') {
-          this.insertText(shortcut.syntax)
+          this.insertText(shortcut.syntax, shortcut.cursorOffset)
         } else {
           this.wrapSelection(shortcut.syntax.prefix, shortcut.syntax.suffix)
         }
@@ -86,13 +90,14 @@ export class EditorPane {
     }
   }
 
-  private insertText(text: string): void {
+  private insertText(text: string, cursorOffset?: number): void {
     const start = this.textarea.selectionStart
     const end = this.textarea.selectionEnd
     const value = this.textarea.value
 
     this.textarea.value = value.substring(0, start) + text + value.substring(end)
-    this.textarea.selectionStart = this.textarea.selectionEnd = start + text.length
+    const cursor = cursorOffset !== undefined ? start + cursorOffset : start + text.length
+    this.textarea.selectionStart = this.textarea.selectionEnd = cursor
     this.textarea.focus()
     this.handleInput()
   }
