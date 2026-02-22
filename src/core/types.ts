@@ -16,6 +16,6 @@ export interface EditorOutput {
 export interface PaneConfig {
   container: HTMLElement
   onUpdate?: (content: string) => void
-  onScroll?: (scrollTop: number, scrollHeight: number) => void
+  onScroll?: (ratio: number) => void
   prism?: object
 }
