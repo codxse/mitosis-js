@@ -19,12 +19,12 @@ export class EditorPane {
   private highlightOverlay: HTMLDivElement
   private container: HTMLDivElement
   private onUpdate: (content: string) => void
-  private onScroll: (scrollTop: number, scrollHeight: number) => void
+  private onScroll: (ratio: number) => void
 
   constructor(config: {
     container: HTMLElement
     onUpdate?: (content: string) => void
-    onScroll?: (scrollTop: number, scrollHeight: number) => void
+    onScroll?: (ratio: number) => void
   }) {
     this.onUpdate = config.onUpdate ?? (() => {})
     this.onScroll = config.onScroll ?? (() => {})
@@ -55,9 +55,10 @@ export class EditorPane {
   }
 
   private handleScroll(): void {
-    const { scrollTop, scrollHeight } = this.textarea
+    const { scrollTop, scrollHeight, clientHeight } = this.textarea
     this.highlightOverlay.scrollTop = scrollTop
-    this.onScroll(scrollTop, scrollHeight)
+    const maxScroll = scrollHeight - clientHeight
+    this.onScroll(maxScroll > 0 ? scrollTop / maxScroll : 0)
   }
 
   private handleKeyDown(e: KeyboardEvent): void {
