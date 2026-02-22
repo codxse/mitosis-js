@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/codxse/mitosis-js/compare/v1.6.2...v1.7.0) (2026-02-22)
+
+
+### Features
+
+* add Ctrl/Cmd+M shortcut to insert figure media template ([608e236](https://github.com/codxse/mitosis-js/commit/608e2363a94212b8126186e7100ac2eb48ce9d02))
+* delta-based editor-to-preview scroll sync ([482ec98](https://github.com/codxse/mitosis-js/commit/482ec98910b07e9ca5a51771c076d689ebe3ca06))
+* EditorPane emits 0-1 scroll ratio ([dec8584](https://github.com/codxse/mitosis-js/commit/dec8584a38cb52e512cba88c35547ec7ce144ec0))
+* PreviewPane emits 0-1 scroll ratio ([bae133a](https://github.com/codxse/mitosis-js/commit/bae133a300f712193a1fb81c8e22f7aa54f766ae))
+* typing preserves preview scroll position ([5d73d45](https://github.com/codxse/mitosis-js/commit/5d73d452703d7ccd956f5a8589fe6c78d2b18fff))
+
 ### [1.6.2](https://github.com/codxse/mitosis-js/compare/v1.6.1...v1.6.2) (2026-02-18)
 
 
